@@ -6,9 +6,17 @@ type Course {
     topic:String!
 }
 
+type Student {
+    _id:ID!,
+    name:String!
+    grade:String!
+    age:Int!
+}
+
 type Query {
     getCourses:[Course]
     getCourse(id:String!):Course
+    getStudents:[Student]
 }
 
 input CourseInput{
@@ -18,6 +26,26 @@ input CourseInput{
     topic:String! 
 }
 
+input StudentInput{
+    name:String!
+    grade:String!
+    age:Int!
+}
+
+input editStudentInput{
+    _id:String!
+    name:String
+    grade:String
+    age:Int
+}
+
+input removeStudent{
+    _id:String!
+}
+
 type Mutation {
 CreateCourse(input:CourseInput!):Course
+CreateStudent(input:StudentInput):Student
+EditStudent(input:editStudentInput):Student
+RemoveStudent(input:removeStudent):Student
 }
