@@ -1,3 +1,10 @@
+"Valida los tipos de nivel"
+enum Level{
+    principiante,
+    intermedio,
+    avanzado
+}
+
 type Course {
     _id:ID!,
     title:String!
@@ -5,19 +12,36 @@ type Course {
     description:String!
     topic:String!
     students:[Student]
+    level:Level!
 }
 
-type Student {
+interface person {
     _id:ID!,
     name:String!
     grade:String!
     age:Int!
 }
 
+type Student implements person{
+    _id:ID!,
+    name:String!
+    grade:String!
+    age:Int!
+    avatar:String!
+}
+
+type monitor implements person {
+    _id:ID!,
+    name:String!
+    grade:String!
+    age:Int!
+    phone:String!
+}
+
 type Query {
     getCourses:[Course]
     getCourse(id:String!):Course
-    getStudents:[Student]
+    getPersons:[person]
 }
 
 input CourseInput{
@@ -25,30 +49,41 @@ input CourseInput{
     teacher:String!
     description:String!
     topic:String!
+    level:Level!
 }
 
-input StudentInput{
+input PersonInput{
     name:String!
     grade:String!
     age:Int!
+    phone:String
+    avatar:String
 }
 
-input editStudentInput{
+input editPersonInput{
     _id:String!
     name:String
     grade:String
     age:Int
+    phone:String
+    avatar:String
+
 }
 
-input removeStudent{
+input removePerson{
     _id:String!
 }
 
 
 type Mutation {
+"crea un curso"
 CreateCourse(input:CourseInput!):Course
-CreateStudent(input:StudentInput):Student
-EditStudent(input:editStudentInput):Student
-RemoveStudent(input:removeStudent):Student
-AddStudentToCourse(courseId:String!,studentId:String!):Course
+"crea un estudiante"
+CreatePerson(input:PersonInput):Student
+"edita un estudiante"
+EditPerson(input:editPersonInput):Student
+"elimina un estudiante"
+RemovePerson(input:removePerson):person
+"agrega un estudiante a un curso"
+AddPersonToCourse(courseId:ID!,personId:ID!):Course
 }
