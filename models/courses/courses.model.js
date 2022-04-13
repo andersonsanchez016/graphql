@@ -16,6 +16,9 @@ const courseSchema = Schema({
     topic: {
         type: String,
         required: [true, 'el tópico es obligatorio']
+    },
+    students: {
+        type: [String]
     }
 });
 

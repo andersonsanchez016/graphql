@@ -4,6 +4,7 @@ type Course {
     teacher:String!
     description:String!
     topic:String!
+    students:[Student]
 }
 
 type Student {
@@ -23,7 +24,7 @@ input CourseInput{
     title:String!
     teacher:String!
     description:String!
-    topic:String! 
+    topic:String!
 }
 
 input StudentInput{
@@ -43,9 +44,11 @@ input removeStudent{
     _id:String!
 }
 
+
 type Mutation {
 CreateCourse(input:CourseInput!):Course
 CreateStudent(input:StudentInput):Student
 EditStudent(input:editStudentInput):Student
 RemoveStudent(input:removeStudent):Student
+AddStudentToCourse(courseId:String!,studentId:String!):Course
 }

@@ -19,9 +19,8 @@ const typeDefs = readFileSync(
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 // Configurar los resolvers
-
 app.use(
-    '/api',
+    '/graphql',
     graphqlHTTP({
         schema: schema,
         rootValue: resolvers,
